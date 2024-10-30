@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), ButtonFragment.ButtonInterface {
             - Show only Button Fragment if portrait
             - show both fragments if Landscape
           */
-        // Loop to check container within activity_main layout
+        // Loop to check which container within activity_main layout
         if (findViewById<View>(R.id.container2) != null) {
             supportFragmentManager.beginTransaction().replace(R.id.container1, ButtonFragment()).replace(R.id.container2, DieFragment()).commit()
         } else {
@@ -40,7 +40,10 @@ class MainActivity : AppCompatActivity(), ButtonFragment.ButtonInterface {
         */
     // Remember to place Fragment transactions on BackStack so then can be reversed
     override fun buttonClicked() {
-
+        // Switch check for portrait vs landscape
+        if (findViewById<View>(R.id.container2) == null) {
+            supportFragmentManager.beginTransaction().replace(R.id.container1, DieFragment()).addToBackStack(null).commit()
+        }
     }
 
 
